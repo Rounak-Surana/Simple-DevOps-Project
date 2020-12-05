@@ -6,26 +6,33 @@ Jenkins is a self-contained Java-based program, ready to run out-of-the-box, wit
 1. EC2 Instance 
    - With Internet Access
    - Security Group with Port `8080` open for internet
-1. Java v1.8.x 
+1. Java v1.11.x 
 
 ## Install Java
 1. We will be using open java for our demo, Get the latest version from http://openjdk.java.net/install/
    ```sh
-   yum install java-1.8*
+   yum install java-1.11*
    OR
    sudo apt-get update && sudo apt install default-jre -y
-   #yum -y install java-1.8.0-openjdk-devel
+   sudo apt install default-jdk   
+   #yum -y install java-1.11.0-openjdk-devel
    ```
 
 1. Confirm Java Version and set the java home
    ```sh
    java -version
-   find /usr/lib/jvm/java-1.8* | head -n 3
-   JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-<Java version which seen in the above output>
+   find /usr/lib/jvm/java-1.11* | head -n 3
+   JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-<Java version which seen in the above output>
    export JAVA_HOME
    PATH=$PATH:$JAVA_HOME
     # To set it permanently update your .bash_profile
    vi ~/.bash_profile
+   #It should look something like this
+   JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
+   PATH=$PATH:$JAVA_HOME:$M2_HOME:$M2
+
+   export PATH   
+
    ```
    _The output should be something like this,_
     ```sh
@@ -38,6 +45,7 @@ Jenkins is a self-contained Java-based program, ready to run out-of-the-box, wit
 ## Install Jenkins
  You can install jenkins using the rpm or by setting up the repo. We will set up the repo so that we can update it easily in the future.
 1. Get the latest version of jenkins from https://pkg.jenkins.io/redhat-stable/ and install
+
    ```sh
    yum -y install wget
    sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
